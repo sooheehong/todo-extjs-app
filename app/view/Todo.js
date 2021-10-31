@@ -1,12 +1,10 @@
-/**
- * This view is an example list of people.
- */
  Ext.define('TodoExtjsApp.view.Todo', {
     extend: 'Ext.grid.Panel',
     xtype: 'todogrid',
 
-    requires: [
-    ],
+    viewConfig: {
+        markDrity: false
+    },
 
     store: {
         type: 'personnel'
@@ -14,12 +12,63 @@
 
     hideHeaders : true,
 
+    tbar: 
+    {
+        layout: 'hbox',
+        items:[
+            {
+                xtype: 'textfield',
+                flex: 1,
+                enableKeyEvents: true,
+                listeners: {
+                    keydown: function(textfield, e, eOpts) {
+                        if (e.keyCode == 13) {
+                            var button = textfield.up().down('button');
+                            button.handler(button);
+                        }
+                    }
+                }
+            },
+            {
+                xtype: 'button',
+                text: '+',
+                handler: function(button) {
+                    var textfield = button.up().down('textfield');
+                    var value = textfield.getValue();
+                    var store = button.up('grid').getStore();
+                    if (value) {
+                        store.add({ name: value });
+                        textfield.setValue('');
+                    }
+                }
+            }
+        ]
+
+    },
+    
     columns: [
-        { text: 'Title',  dataIndex: 'name' },
+        { 
+            xtype: 'checkcolumn',
+            dataIndex: 'isDone'
+        },
+        { 
+            flex: 1,
+            dataIndex: 'name',
+            editor: {
+                completeOnEnter: false,
+                field: {
+                    xtype: 'textfield',
+                    allowBlank: false
+                }
+            }
+        },
         { 
             xtype: 'actioncolumn',
             width:50,
-            iconCls: 'x-fa fa-trash'
+            iconCls: 'x-fa fa-trash',
+            handler: function(view, rowIndex, colIndex, item, e, record, row) {
+                view.getStore().remove(record);
+            }
         }
     ],
 
@@ -27,9 +76,5 @@
         cellediting: {
             clicksToEdit: 2
         }
-    },
-
-    // listeners: {
-    //     select: 'onItemSelected'
-    // }
+    }
 });

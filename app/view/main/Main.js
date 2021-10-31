@@ -80,19 +80,6 @@ Ext.define('TodoExtjsApp.view.main.Main', {
         // The following grid shares a store with the classic version's grid as well!
         items: [
             {
-                layout: 'hbox',
-                items:[
-                    {
-                        xtype: 'textfield'
-                    },
-                    {
-                        xtype: 'button',
-                        text: '+'
-                    }
-                ]
-
-            },
-            {
                 xtype: 'todogrid'
 
             }
