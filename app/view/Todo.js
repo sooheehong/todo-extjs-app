@@ -2,12 +2,18 @@
     extend: 'Ext.grid.Panel',
     xtype: 'todogrid',
 
+    requires:[
+        'TodoExtjsApp.view.TodoController'
+    ],
+    
+    controller: 'todogrid',
+
     viewConfig: {
         markDirty: false
     },
 
     store: {
-        type: 'personnel'
+        type: 'todo'
     },
 
     hideHeaders : true,
@@ -21,26 +27,13 @@
                 flex: 1,
                 enableKeyEvents: true,
                 listeners: {
-                    keydown: function(textfield, e, eOpts) {
-                        if (e.keyCode == 13) {
-                            var button = textfield.up().down('button');
-                            button.handler(button);
-                        }
-                    }
+                    keydown: 'enterKeyEventHandler'
                 }
             },
             {
                 xtype: 'button',
                 text: '+',
-                handler: function(button) {
-                    var textfield = button.up().down('textfield');
-                    var value = textfield.getValue();
-                    var store = button.up('grid').getStore();
-                    if (value) {
-                        store.add({ name: value });
-                        textfield.setValue('');
-                    }
-                }
+                handler: 'addHandler'
             }
         ]
 
@@ -49,11 +42,11 @@
     columns: [
         { 
             xtype: 'checkcolumn',
-            dataIndex: 'isDone'
+            dataIndex: 'done'
         },
         { 
             flex: 1,
-            dataIndex: 'name',
+            dataIndex: 'title',
             editor: {
                 completeOnEnter: false,
                 field: {
@@ -65,13 +58,12 @@
         { 
             xtype: 'actioncolumn',
             width:50,
+            align: 'center',
             iconCls: 'x-fa fa-trash',
+            handler: 'deleteHandler',
             // isActionDisabled: function(view, rowIndex, colIndex, item, record) {
             //     return record.get('isDone');
             // },
-            handler: function(view, rowIndex, colIndex, item, e, record, row) {
-                view.getStore().remove(record);
-            }
         }
     ],
 
@@ -79,9 +71,7 @@
         cellediting: {
             clicksToEdit: 2,
             listeners: {
-                beforeedit: function(editor, context, eOpts) {
-                    return !context.record.get('isDone');
-                }
+                beforeedit: 'beforeedit'
             }
         }
     }
