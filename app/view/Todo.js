@@ -3,7 +3,7 @@
     xtype: 'todogrid',
 
     viewConfig: {
-        markDrity: false
+        markDirty: false
     },
 
     store: {
@@ -66,6 +66,9 @@
             xtype: 'actioncolumn',
             width:50,
             iconCls: 'x-fa fa-trash',
+            // isActionDisabled: function(view, rowIndex, colIndex, item, record) {
+            //     return record.get('isDone');
+            // },
             handler: function(view, rowIndex, colIndex, item, e, record, row) {
                 view.getStore().remove(record);
             }
@@ -74,7 +77,12 @@
 
     plugins: {
         cellediting: {
-            clicksToEdit: 2
+            clicksToEdit: 2,
+            listeners: {
+                beforeedit: function(editor, context, eOpts) {
+                    return !context.record.get('isDone');
+                }
+            }
         }
     }
 });
