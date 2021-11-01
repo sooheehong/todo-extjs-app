@@ -20,11 +20,18 @@ Ext.define('TodoExtjsApp.view.main.Main', {
     controller: 'main',
     viewModel: 'main',
 
-    ui: 'navigation',
+    //ui: 'navigation',
+    
+    layout: {
+        type: 'vbox',
+        align: 'center',
+    },
+
 
     items: [
         {
-            xtype: 'todogrid'
+            xtype: 'todogrid',
+            width: '80%'
 
         }
     ]

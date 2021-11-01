@@ -17,7 +17,10 @@ Ext.define('TodoExtjsApp.view.TodoController', {
         var value = textfield.getValue();
         var store = button.up('grid').getStore();
         if (value) {
-            store.add({ title: value });
+            store.add({ 
+                title: value,
+                done: false
+            });
             textfield.setValue('');
         }
     },

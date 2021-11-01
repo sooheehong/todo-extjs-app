@@ -26,6 +26,7 @@
                 xtype: 'textfield',
                 flex: 1,
                 enableKeyEvents: true,
+                emptyText: 'Add Todo here',
                 listeners: {
                     keydown: 'enterKeyEventHandler'
                 }

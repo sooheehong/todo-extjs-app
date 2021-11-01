@@ -5,20 +5,28 @@ Ext.define('TodoExtjsApp.store.Todo', {
 
     model: 'TodoExtjsApp.model.Todo',
 
-    data: {
-        items: [
-            { title: 'Jean Luc', done: true  },
-            { title: 'Worf',     done: true  },
-            { title: 'Deanna',   done: false },
-            { title: 'Data',     done: false }
-        ]
-    },
-
+    autoSync: true,
+    autoLoad: true,
     proxy: {
-        type: 'memory',
+        type: 'ajax',
+        api: {
+            create: '/todo',
+            read:'/todo',
+            update: '/todo',
+            destroy: '/todo',
+        },
+        actionMethods: {
+            create: 'POST',
+            read: 'GET',
+            update: 'PUT',
+            destroy: 'DELETE'
+        },
         reader: {
             type: 'json',
-            rootProperty: 'items'
+            rootProperty: 'data'
+        },
+        writer: {
+            writeAllFields: true
         }
     }
 });
