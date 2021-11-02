@@ -10,9 +10,9 @@ Ext.define('TodoExtjsApp.store.Todo', {
     proxy: {
         type: 'ajax',
         api: {
-            create: '/todo',
+            create: '/todo/extjs',
             read:'/todo',
-            update: '/todo',
+            update: '/todo/extjs',
             destroy: '/todo',
         },
         actionMethods: {
