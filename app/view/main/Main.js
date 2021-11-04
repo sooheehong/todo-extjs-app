@@ -9,13 +9,7 @@ Ext.define('TodoExtjsApp.view.main.Main', {
     extend: 'Ext.panel.Panel',
     xtype: 'app-main',
 
-    requires: [
-        'Ext.*',
 
-        'TodoExtjsApp.view.main.MainController',
-        'TodoExtjsApp.view.main.MainModel',
-        'TodoExtjsApp.view.Todo'
-    ],
 
     controller: 'main',
     viewModel: 'main',

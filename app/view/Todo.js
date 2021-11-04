@@ -2,10 +2,6 @@
     extend: 'Ext.grid.Panel',
     xtype: 'todogrid',
 
-    requires:[
-        'TodoExtjsApp.view.TodoController'
-    ],
-    
     controller: 'todogrid',
 
     viewConfig: {
@@ -49,7 +45,6 @@
             flex: 1,
             dataIndex: 'title',
             editor: {
-                completeOnEnter: false,
                 field: {
                     xtype: 'textfield',
                     allowBlank: false
