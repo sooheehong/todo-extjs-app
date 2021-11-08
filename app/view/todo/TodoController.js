@@ -1,5 +1,5 @@
 
-Ext.define('TodoExtjsApp.view.TodoController', {
+Ext.define('TodoExtjsApp.view.todo.TodoController', {
     extend: 'Ext.app.ViewController',
 
     alias: 'controller.todogrid',
@@ -31,5 +31,11 @@ Ext.define('TodoExtjsApp.view.TodoController', {
 
     beforeedit: function(editor, context, eOpts) {
         return !context.record.get('done');
+    },
+
+    onLogout: function(button) {
+        localStorage.setItem(TodoExtjsApp.setting.ACCESS_TOKEN, false);
+        window.location.href = "/";
     }
+
 });

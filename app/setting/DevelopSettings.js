@@ -1,7 +1,10 @@
 
 Ext.define('TodoExtjsApp.setting.DevelopSettings', {
     singleton: true,
+    alternateClassName : ['TodoExtjsApp.setting'],
     
+    ACCESS_TOKEN: 'ACCESS_TOKEN_EXTJS',
+
     constructor: function (cfg) {
         if (!Ext.manifest.backendHost) {
             Ext.Ajax.request({
@@ -14,7 +17,7 @@ Ext.define('TodoExtjsApp.setting.DevelopSettings', {
                         Ext.manifest.backendHost = '';    
                     }
                     
-                    Ext.Ajax.on('beforerequest', function (conn, options, eOpts) {     
+                    Ext.Ajax.on('beforerequest', function (conn, options, eOpts) {
                         if (Ext.manifest.backendHost) {
                             options.url = Ext.manifest.backendHost + options.url;
                         }

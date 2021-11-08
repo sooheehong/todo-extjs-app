@@ -9,8 +9,6 @@ Ext.define('TodoExtjsApp.view.main.Main', {
     extend: 'Ext.panel.Panel',
     xtype: 'app-main',
 
-
-
     controller: 'main',
     viewModel: 'main',
 
@@ -26,7 +24,11 @@ Ext.define('TodoExtjsApp.view.main.Main', {
         {
             xtype: 'todogrid',
             width: '80%'
-
         }
-    ]
+    ],
+
+    bbar: {
+        xtype: 'label',
+        text: 'Copyright ⓒ sooheehong TODO APP,' + new Date().getFullYear() + '.'
+    }
 });

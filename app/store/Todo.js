@@ -10,16 +10,16 @@ Ext.define('TodoExtjsApp.store.Todo', {
     proxy: {
         type: 'ajax',
         api: {
-            create: '/todo/extjs',
-            read:'/todo',
-            update: '/todo/extjs',
-            destroy: '/todo',
+            create: TodoExtjsApp.service.create.url,
+            read: TodoExtjsApp.service.read.url,
+            update:  TodoExtjsApp.service.update.url,
+            destroy:  TodoExtjsApp.service.destroy.url,
         },
         actionMethods: {
-            create: 'POST',
-            read: 'GET',
-            update: 'PUT',
-            destroy: 'DELETE'
+            create:  TodoExtjsApp.service.create.method,
+            read:  TodoExtjsApp.service.read.method,
+            update:  TodoExtjsApp.service.update.method,
+            destroy:  TodoExtjsApp.service.destroy.method
         },
         reader: {
             type: 'json',

@@ -1,4 +1,4 @@
- Ext.define('TodoExtjsApp.view.Todo', {
+ Ext.define('TodoExtjsApp.view.todo.Todo', {
     extend: 'Ext.grid.Panel',
     xtype: 'todogrid',
 
@@ -13,6 +13,15 @@
     },
 
     hideHeaders : true,
+
+    header: {
+        title: '오늘의 할 일',
+        items: [{
+            xtype: 'button',
+            text: '로그아웃',
+            handler: 'onLogout'
+        }]
+    },
 
     tbar: 
     {
