@@ -20,8 +20,8 @@ Ext.define('TodoExtjsApp.view.login.Login', {
             items: [
                 {
                     xtype: 'textfield',
-                    name: 'username',
-                    fieldLabel: 'Username'
+                    name: 'email',
+                    fieldLabel: 'Email'
                 },
                 {
                     xtype: 'textfield',

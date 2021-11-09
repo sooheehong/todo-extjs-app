@@ -34,8 +34,7 @@ Ext.define('TodoExtjsApp.view.todo.TodoController', {
     },
 
     onLogout: function(button) {
-        localStorage.setItem(TodoExtjsApp.setting.ACCESS_TOKEN, false);
-        window.location.href = "/";
+        this.getView().up('app-main').getController().logout();
     }
 
 });

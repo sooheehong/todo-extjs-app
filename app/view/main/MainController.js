@@ -7,6 +7,11 @@ Ext.define('TodoExtjsApp.view.main.MainController', {
 
     alias: 'controller.main',
 
+    logout: function() {
+        localStorage.removeItem(TodoExtjsApp.setting.ACCESS_TOKEN);
+        this.redirectTo('login');
+    },
+
     onItemSelected: function (sender, record) {
         Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
     },

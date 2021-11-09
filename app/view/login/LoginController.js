@@ -4,16 +4,22 @@ Ext.define('TodoExtjsApp.view.login.LoginController', {
 
     onLoginClick: function () {
         var me = this;
-        
-        // TODO : 서비스 연결
 
-        // localStorage 값을 true로 설정
-        localStorage.setItem(TodoExtjsApp.setting.ACCESS_TOKEN, true);
-        
-        // Login Window를 제거
-        me.getView().destroy();
-        //viewport에 main view를 추가
-        Ext.widget('app-main');
+        Ext.Ajax.request({
+            url: '/auth/signin',
+            method: 'POST',
+            async: false,
+            jsonData: me.getView().down('form').getValues(),
+            success: function (response, request) {
+                var result = Ext.decode(response.responseText, true);
+                localStorage.setItem(TodoExtjsApp.setting.ACCESS_TOKEN, result.token);
+
+                me.redirectTo('todo');
+            },
+            failure: function (test) {
+                // TODO
+            },
+        });
     },
 
     onClickLoginBox: function () {
@@ -21,7 +27,21 @@ Ext.define('TodoExtjsApp.view.login.LoginController', {
     },
 
     onSignUpClick: function () {
-        // TODO : 서비스 연결
+        var me = this;
+
+        Ext.Ajax.request({
+            url: '/auth/signup',
+            method: 'POST',
+            async: false,
+            jsonData: me.getView().down('form').getValues(),
+            success: function (response, request) {
+                Ext.Msg.alert('Success', '회원가입이 완료되었습니다');
+                me.getView().destroy();
+            },
+            failure: function (test) {
+                // TODO
+            },
+        });
     },
 
     onClickSingUpBox: function () {

@@ -24,7 +24,7 @@ Ext.define('TodoExtjsApp.service.ApiService', {
         method: 'GET'
     },
     update: {
-        url: '/todo/textj',
+        url: '/todo/extjs',
         method: 'PUT'
     },
     destroy: {

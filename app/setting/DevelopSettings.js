@@ -21,6 +21,18 @@ Ext.define('TodoExtjsApp.setting.DevelopSettings', {
                         if (Ext.manifest.backendHost) {
                             options.url = Ext.manifest.backendHost + options.url;
                         }
+
+                        var token = localStorage.getItem(TodoExtjsApp.setting.ACCESS_TOKEN);
+                        if (token) {
+                            if (!options.headers) options.headers = {};
+                            options.headers['Authorization'] = 'Bearer ' + token ;
+                        }
+                    });
+
+                    Ext.Ajax.on('requestexception', function (conn, response, options) {
+                        if (response.status === 403) {
+                            Ext.getApplication().redirectTo('login');
+                        }
                     });                     
                 },
                 failure: function (respons) {

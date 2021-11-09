@@ -17,6 +17,22 @@ Ext.define('TodoExtjsApp.Application', {
     
     autoCreateViewport: false,
     
+    routes: {
+        'login': 'handleLoginRoute',
+        'todo':  'handleTodoRoute',
+    },
+
+    handleLoginRoute: function() {
+        var main = this.getMainView();
+        if (main) main.destroy();
+        Ext.widget('login');
+    },
+
+    handleTodoRoute: function() {
+        Ext.WindowManager.each(function(item) { item.close(); });
+        this.setMainView('TodoExtjsApp.view.main.Main');
+    },
+
     launch: function() {
         // 브라우저가 LocalStorage를 지원하는지 체크 할 것
         // 중요 : 어플리케이션을 구현할 때 Cookies, LocalStorage 등
@@ -29,10 +45,8 @@ Ext.define('TodoExtjsApp.Application', {
         }
         loggedIn = localStorage.getItem(TodoExtjsApp.setting.ACCESS_TOKEN);
 
-        //loggedIn 값이 있으면 main 뷰를 열고, 아니면 login window를 연다.
-        Ext.widget(loggedIn == 'true' ? 'app-main' : 'login');
+        this.redirectTo(loggedIn ? 'todo' : 'login');
     },
-
 
     onAppUpdate: function () {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
